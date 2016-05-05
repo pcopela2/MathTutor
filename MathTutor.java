@@ -2,7 +2,7 @@
 /**
  * Created by parkercopeland on 5/4/16.
  */
-
+import javax.swing.JOptionPane;
 import java.util.Scanner;
 import java.util.Random;
 public class MathTutor {
@@ -17,38 +17,65 @@ public class MathTutor {
 
     public int getDifficultyType(){ while (choice1 < 1 || choice1 > 3)
     {
-        System.out.println("Please select difficulty type");
-        System.out.println("1) Easy");
-        System.out.println("2) Moderate");
-        System.out.println("3) Difficult");
-        System.out.println("Choice: ");
-        choice1 = input.nextInt();
+        String textChoice = JOptionPane.showInputDialog("Please select difficulty type: \n" +
+                "1) Easy \n" +
+                "2) Moderate \n" +
+                "3) Difficult \n" +
+                "Choice: ");
+        choice1 = Integer.parseInt(textChoice);
         if(choice1 < 1 || choice1 > 3 ){
-            System.out.print("Choice must be in the range of 1-3");
+            JOptionPane.showMessageDialog(null, "Please select a number 1-3");
         }
     }return choice1;}
 
     public int getQuestionType(){ while (choice < 1 || choice > 4)
     {
-        System.out.println("Please select the type of questions you would like");
-        System.out.println("1) Addition");
-        System.out.println("2) Subtraction");
-        System.out.println("3) Multiplication");
-        System.out.println("4) Division");
-        System.out.print("Type: ");
-        choice = input.nextInt();
+        String textChoice1 = JOptionPane.showInputDialog("Please select the type of questions you would like: \n" +
+                "1) Addition \n" +
+                "2) Subtraction \n" +
+                "3) Multiplication \n" +
+                "4) Divistion \n" +
+                "Type: ");
+        choice = Integer.parseInt(textChoice1);
         if (choice < 1 || choice > 4)
         {
-            System.out.println("Choice must be in the range 1-4");
+            JOptionPane.showMessageDialog(null, "Please select a number 1-4");
         }
     }return choice;}
+
     public void askQuestions() {
         for (int i = 0; i < 10; i++)
         {
-            int num1 = genRandomNum();
-            int num2 = genRandomNum();
-            int num3 = genRandomNum();
-            int num4 = genRandomNum2();
+            int num1 = 0;
+            int num2 = 0;
+            int num3 = 0;
+
+            if(choice1 == 1 && choice == 1 || choice == 2) {
+                num1 = genRandomNum();
+                num2 = genRandomNum();
+                num3 = genRandomNum();
+            }else if(choice1 == 1 && choice == 3 || choice == 4 ){
+                num1 = genRandomNum2();
+                num2 = genRandomNum2();
+                num3 = genRandomNum2();
+            }else if(choice1 == 2 && choice == 1 || choice == 2){
+                num1 = genRandomNum3();
+                num2 = genRandomNum3();
+                num3 = genRandomNum3();
+            }else if(choice1 == 2 && choice == 3 || choice == 4){
+                num1 = genRandomNum4();
+                num2 = genRandomNum4();
+                num3 = genRandomNum4();
+            }else if(choice1 == 3 && choice == 1 || choice == 2){
+                num1 = genRandomNum5();
+                num2 = genRandomNum5();
+                num3 = genRandomNum5();
+            }else if(choice1 == 3 && choice == 3 || choice == 4){
+                num1 = genRandomNum6();
+                num2 = genRandomNum6();
+                num3 = genRandomNum6();
+            }
+
             int sign = choice;
             if (sign == 5)
             {
@@ -64,50 +91,62 @@ public class MathTutor {
                     break;
                 case 4: division(num1, num2, num3);
                     break;
-                default: System.out.println("Error");
+                default: JOptionPane.showMessageDialog(null, "Error");
                     System.exit(1);
             }
         }
     }
-    public int genRandomNum() {
-        return (int)generator.nextInt(9) +1;
-    }
 
-    public int genRandomNum2() {
+    public int genRandomNum() {
         return (int)generator.nextInt(50) +1;
+    }
+    public int genRandomNum2() {
+        return (int)generator.nextInt(12) +1;
+    }
+    public int genRandomNum3() {
+        return (int)generator.nextInt(90) +10;
+    }
+    public int genRandomNum4() {
+        return (int)generator.nextInt(40) +10;
+    }
+    public int genRandomNum5() {
+        return (int)generator.nextInt(900) +100;
+    }
+    public int genRandomNum6() {
+        return (int)generator.nextInt(990) +10;
     }
 
     public void genMotivationalPhrase(){
         int numMo = (int)generator.nextInt(4)+1;
         switch(numMo)
         {
-            case 1: System.out.println("Great job!");
+            case 1: JOptionPane.showMessageDialog(null, "Great job!");
                 break;
-            case 2: System.out.println("I knew you could do it!");
+            case 2: JOptionPane.showMessageDialog(null, "I knew you could do it!");
                 break;
-            case 3: System.out.println("Math is easy!");
+            case 3: JOptionPane.showMessageDialog(null, "Math is easy!");
                 break;
-            case 4: System.out.println("Hello MIT!");
+            case 4: JOptionPane.showMessageDialog(null, "Hello MIT!");
                 break;
-            default: System.out.println("Error");
+            default: JOptionPane.showMessageDialog(null, "Error");
         }}
     public void genMotivationalWrPhrase(){
         int numMo = (int)generator.nextInt(4)+1;
         switch(numMo)
         {
-            case 1: System.out.println("Try again!");
+            case 1: JOptionPane.showMessageDialog(null, "Try again!");
                 break;
-            case 2: System.out.println("So close!");
+            case 2: JOptionPane.showMessageDialog(null, "So close!");
                 break;
-            case 3: System.out.println("I know you can do it!");
+            case 3: JOptionPane.showMessageDialog(null, "I know you can do it!");
                 break;
-            case 4: System.out.println("You'll get it next time!");
+            case 4: JOptionPane.showMessageDialog(null, "You'll get it next time!");
                 break;
-            default: System.out.println("Error");
+            default: JOptionPane.showMessageDialog(null, "Error");
         }}
     public void addition(int num1, int num2) {
-        System.out.print("What is " + num1 + " + " + num2 + "? ");
-        int answer = input.nextInt();
+        String textChoice2 = JOptionPane.showInputDialog("What is " + num1 + " + " + num2 + "? ");
+        int answer = Integer.parseInt(textChoice2);
         if (num1 + num2 == answer)
         {
             genMotivationalPhrase();
@@ -120,8 +159,8 @@ public class MathTutor {
     }
     public void subtraction(int num1, int num2) {
         if(num1>num2){
-            System.out.print("What is " + num1 + " - " + num2 + "? ");
-            int answer = input.nextInt();
+            String textChoice3 = JOptionPane.showInputDialog("What is " + num1 + " - " + num2 + "? ");
+            int answer = Integer.parseInt(textChoice3);
             if (num1 - num2 == answer)
             {
                 genMotivationalPhrase();
@@ -133,8 +172,8 @@ public class MathTutor {
             }
         }
         else{
-            System.out.print("What is " + num2 + " - " + num1 + "? ");
-            int answer = input.nextInt();
+            String textChoice4 = JOptionPane.showInputDialog("What is " + num2 + " - " + num1 + "? ");
+            int answer = Integer.parseInt(textChoice4);
             if (num2 - num1 == answer)
             {
                 genMotivationalPhrase();
@@ -147,8 +186,8 @@ public class MathTutor {
         }
     }
     public void multiplication(int num1, int num2) {
-        System.out.print("What is " + num1 + " * " + num2 + "? ");
-        int answer = input.nextInt();
+        String textChoice5 = JOptionPane.showInputDialog("What is " + num1 + " * " + num2 + "? ");
+        int answer = Integer.parseInt(textChoice5);
         if (num1 * num2 == answer)
         {
             genMotivationalPhrase();
@@ -162,8 +201,8 @@ public class MathTutor {
     public void division(int num1, int num2, int num3) {
         boolean quotientCorrect = false;
         num3 = num1*num2;
-        System.out.print("What is the quotient of " + num3 + " / " + num1 + "? ");
-        int answer = input.nextInt();
+        String textChoice6 = JOptionPane.showInputDialog("What is the quotient of " + num3 + " / " + num1 + "? ");
+        int answer = Integer.parseInt(textChoice6);
         if (answer == num3/num1);
         {
             quotientCorrect = true;
@@ -181,18 +220,25 @@ public class MathTutor {
     }
     public void printReport() {
         double win = 10.0;
-        System.out.println("Number of correct responses: " + numCorrect + "/" + 10);
         double percent = numCorrect / win * 100 ;
-        System.out.println("Your percentage: " + percent + "%");
+
         if(percent<75){
-            System.out.println("Please see your teacher for help with ");
             if(choice==1)
-                System.out.println("Addition");
+                JOptionPane.showMessageDialog(null, "Number of correct responses: " + numCorrect + "/" + 10 + "\n" +
+                        "Your percentage: " + percent + "% \n" +
+                        "Please see your teacher for help with Addition");
             else if(choice==2)
-                System.out.println("Subtraction");
+                JOptionPane.showMessageDialog(null, "Number of correct responses: " + numCorrect + "/" + 10 + "\n" +
+                        "Your percentage: " + percent + "% \n" +
+                        "Please see your teacher for help with Subtraction");
             else if(choice==3)
-                System.out.println("Multiplication");
+                JOptionPane.showMessageDialog(null, "Number of correct responses: " + numCorrect + "/" + 10 + "\n" +
+                        "Your percentage: " + percent + "% \n" +
+                        "Please see your teacher for help with Multiplication");
             else if(choice==4)
-                System.out.println("Division");}
+                JOptionPane.showMessageDialog(null, "Number of correct responses: " + numCorrect + "/" + 10 + "\n" +
+                        "Your percentage: " + percent + "% \n" +
+                        "Please see your teacher for help with Division");
+        }
     }
 }
